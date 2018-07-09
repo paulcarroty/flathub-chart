@@ -8,3 +8,13 @@ cache:
     - "node_modules"
 script:
     - node index.js
+deploy:
+        provider: releases
+        api_key: $GITHUB_OAUTH_TOKEN
+        file:
+          - daily.json
+          - weekly.json
+          - monthly.json
+          - yearly.json
+        overwrite: true
+        skip_cleanup: true
