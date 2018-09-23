@@ -2,24 +2,36 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 
 let mergeObjs = (o1, o2) => {
-	let uniqueKeys = [...new Set([...Object.keys(o1), ...Object.keys(o2)])];
-	let res = uniqueKeys.reduce((a, c) => ({ ...a,
-		[c]: ((o1[c] || 0) + (o2[c] || 0))
-	}), {});
+	let res = {};
+	// o2 can be 404.
+	if (typeof(o2) == 'number')
+		return o1;
+	Object.keys(o2).forEach(key => {
+		let s1 = o1[key] || {};  // can be empty on first merge
+		let s2 = o2[key];
+		let uniqueKeys = [...new Set([...Object.keys(s1), ...Object.keys(s2)])];
+		res[key] = uniqueKeys.reduce((a, c) => ({ ...a,
+			[c]: ((s1[c] || 0) + (s2[c] || 0))
+		}), {});
+	});
 	return res;
 }
 
-let riseAndShine = (toFile, obj) => {
+let riseAndShine = (toFile, objs) => {
 	//sorting by values 
 
-	let res = Object.keys(obj).sort((a, b) => obj[b] - obj[a])
-		.reduce((acc, key) => ({ ...acc,
-			[key]: obj[key]
-		}), {});
-	//console.log('This is the res: ', res)
-	fs.writeFile(toFile, JSON.stringify(res, null, 2), 'utf8', (err) => {
-		if (err) throw err;
-		//console.log('Successfully saved!');
+	Object.keys(objs).forEach(key => {
+		let obj = objs[key];
+		let res = Object.keys(obj).sort((a, b) => obj[b] - obj[a])
+			.reduce((acc, key) => ({ ...acc,
+				[key]: obj[key]
+			}), {});
+		//console.log('This is the res: ', res)
+		let fileName = toFile + "_" + key + ".json";
+		fs.writeFile(fileName, JSON.stringify(res, null, 2), 'utf8', (err) => {
+			if (err) throw err;
+			//console.log('Successfully saved!');
+		});
 	});
 }
 
@@ -32,16 +44,22 @@ let dailyStat = async (url) => {
 	if (typeof (data) !== 'number') {
 
 		let json = await data.json();
+		let stats = [['new_downloads', (s => [s[0]-s[1]])],
+		             ['updates', (s => [s[1]])]];
+		return Object.assign(...stats.map(([name, fun]) => {
+			let sumArr = Object.values(json.refs)
+				.map(refArchToCounts => Object.values(refArchToCounts))
+				.map(refCounts => [].concat(...refCounts.map(fun))
+					.reduce((a, c) => a + c));
 
-		let sumArr = Object.values(json.refs).map(e => Object.values(e))
-			.map(e => [].concat(...e).reduce((a, c) => a + c));
+			let resRaw = Object.keys(json.refs).reduce((obj, key, ind) => ({ ...obj,
+				[key]: sumArr[ind]
+			}), {});
 
-		let resRaw = Object.keys(json.refs).reduce((obj, key, ind) => ({ ...obj,
-			[key]: sumArr[ind]
-		}), {});
-
-		//console.log('resRaw: ' , resRaw);
-		return resRaw;
+			var resRawDict = {};
+			resRawDict[name] = resRaw;
+			return resRawDict;
+		}));
 	} else {
 		console.log(`Fetch error ${data} on page ${url}`);
 		return data;
@@ -65,7 +83,7 @@ let weeklyStat = async () => {
 	});
 
 	let dailystat = await dailyStat(weekLinks[0]);
-	riseAndShine('./daily.json', await dailystat);
+	riseAndShine('./daily', await dailystat);
 
 
 	let weekStat = {};
@@ -73,7 +91,7 @@ let weeklyStat = async () => {
 		weekStat = mergeObjs(weekStat, await dailyStat(e));
 	}
 	//console.log(weekStat);
-	riseAndShine('./weekly.json', await weekStat);
+	riseAndShine('./weekly', await weekStat);
 	return weekStat;
 }
 
@@ -99,7 +117,7 @@ let monthlyStat = async () => {
 		monthStat = mergeObjs(monthStat, await dailyStat(e));
 	}
 	//console.log(monthStat)
-	riseAndShine('./monthly.json', await monthStat);
+	riseAndShine('./monthly', await monthStat);
 	return monthStat;
 }
 
@@ -128,7 +146,7 @@ let yearlyStat = async () => {
 		console.log(`getting ${e}`);
 	}
 	// console.log(yearStat);
-	riseAndShine('./yearly.json', await yearStat);
+	riseAndShine('./yearly', await yearStat);
 	return yearStat;
 }
 
