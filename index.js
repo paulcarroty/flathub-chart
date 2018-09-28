@@ -2,6 +2,7 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 
 let mergeObjs = (o1, o2) => {
+	// merge two days of stats
 	let uniqueKeys = [...new Set([...Object.keys(o1), ...Object.keys(o2)])];
 	let res = uniqueKeys.reduce((a, c) => ({ ...a,
 		[c]: ((o1[c] || 0) + (o2[c] || 0))
@@ -10,7 +11,7 @@ let mergeObjs = (o1, o2) => {
 }
 
 let riseAndShine = (toFile, obj) => {
-	//sorting by values 
+	//sorting by values and write to file
 
 	let res = Object.keys(obj).sort((a, b) => obj[b] - obj[a])
 		.reduce((acc, key) => ({ ...acc,
@@ -33,8 +34,10 @@ let dailyStat = async (url) => {
 
 		let json = await data.json();
 
-		let sumArr = Object.values(json.refs).map(e => Object.values(e))
-			.map(e => [].concat(...e).reduce((a, c) => a + c));
+		let sumArr = Object.values(json.refs).map(e => Object.values(e).reduce((a, e) => a + e[0], 0));
+		// let sumArr = Object.values(json.refs).map(e => Object.values(e)).map(e => [].concat(...e).reduce((a, c) => a + c));
+		// sum of all digits inside objects
+		//console.log(sumArr);
 
 		let resRaw = Object.keys(json.refs).reduce((obj, key, ind) => ({ ...obj,
 			[key]: sumArr[ind]
@@ -131,11 +134,10 @@ let yearlyStat = async () => {
 	riseAndShine('./yearly.json', await yearStat);
 	return yearStat;
 }
+//yearlyStat();
 
-// yearlyStat();
 
-
-// dailyStat('https://flathub.org/stats/2018/06/30.json');
+//dailyStat('https://flathub.org/stats/2018/06/30.json');
 weeklyStat();
 monthlyStat();
 yearlyStat();

@@ -7,18 +7,22 @@ cache:
   directories:
     - "node_modules"
 script:
-    - node index.js
+    - node index.js; node index-newinst-updates.js
 deploy:
         provider: releases
         api_key: $GITHUB_OAUTH_TOKEN
         file:
+          - daily.json
           - daily_new_downloads.json
-          - weekly_new_downloads.json
-          - monthly_new_downloads.json
-          - yearly_new_downloads.json
           - daily_updates.json
+          - weekly.json
+          - weekly_new_downloads.json
           - weekly_updates.json
+          - monthly.json
+          - monthly_new_downloads.json
           - monthly_updates.json
+          - yearly.json
+          - yearly_new_downloads.json
           - yearly_updates.json
         overwrite: true
         skip_cleanup: true
