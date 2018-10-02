@@ -8,6 +8,11 @@ cache:
     - "node_modules"
 script:
     - node index.js; node index-newinst-updates.js
+before_deploy:
+      # Set up git user name and tag this commit
+    - git config --local user.name $GIT_USER_NAME
+    - git config --local user.email $GIT_USER_EMAIL
+    - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"    
 deploy:
         provider: releases
         api_key: $GITHUB_OAUTH_TOKEN
