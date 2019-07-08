@@ -1,3 +1,4 @@
+dist: xenial
 language: node_js
 node_js:
   - "12"
@@ -18,16 +19,16 @@ deploy:
         api_key: $GITHUB_OAUTH_TOKEN
         file:
           - daily.json
-          - daily_new_downloads.json
-          - daily_updates.json
+        #  - daily_new_downloads.json
+        #  - daily_updates.json
           - weekly.json
-          - weekly_new_downloads.json
-          - weekly_updates.json
+        #  - weekly_new_downloads.json
+        #  - weekly_updates.json
           - monthly.json
-          - monthly_new_downloads.json
-          - monthly_updates.json
+        #  - monthly_new_downloads.json
+        #  - monthly_updates.json
           - yearly.json
-          - yearly_new_downloads.json
-          - yearly_updates.json
+        #  - yearly_new_downloads.json
+        #  - yearly_updates.json
         overwrite: true
         skip_cleanup: true
