@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 
 let mergeObjs = (o1, o2) => {
-	// merge two days of stats
+	// merge two days data
 	let uniqueKeys = [...new Set([...Object.keys(o1), ...Object.keys(o2)])];
 	let res = uniqueKeys.reduce((a, c) => ({ ...a,
 		[c]: ((o1[c] || 0) + (o2[c] || 0))
@@ -55,7 +55,7 @@ let dailyStat = async (url) => {
 
 
 let weeklyStat = async () => {
-	let ysd = new Date().setHours(0, 0, 0, 0) - 86400000; // today date in ms minus 24h
+	let ysd = new Date().setHours(0, 0, 0, 0); // today
 
 	// store last week datas; 86400000 = 24h in ms
 	let week = [...Array(7).keys()].map(e => ysd - e * 86400000);
@@ -84,7 +84,7 @@ let weeklyStat = async () => {
 
 
 let monthlyStat = async () => {
-	let ysd = new Date().setHours(0, 0, 0, 0) - 86400000; // today date in ms minus 24h
+	let ysd = new Date().setHours(0, 0, 0, 0); // today
 
 	// store last week datas; 86400000 - 24h in ms
 	let month = [...Array(31).keys()].map(e => ysd - e * 86400000);
@@ -110,8 +110,8 @@ let monthlyStat = async () => {
 
 
 let yearlyStat = async () => {
-	let ysd = new Date().setHours(0, 0, 0, 0) - 86400000; // today date in ms minus 24h
-	let startDate = new Date('2018-04-29').getTime();
+	let ysd = new Date().setHours(0, 0, 0, 0); // today date in ms minus 24h
+	let startDate = yst - 365 * 86400000; // 365 days ago
 	let allDays = Math.floor((ysd - startDate) / 86400000);
 	// store all days time; 86400000 - 24h in ms
 	let year = [...Array(allDays).keys()].map(e => new Date(ysd - e * 86400000));
@@ -134,7 +134,6 @@ let yearlyStat = async () => {
 	riseAndShine('./yearly.json', await yearStat);
 	return yearStat;
 }
-//yearlyStat();
 
 
 //dailyStat('https://flathub.org/stats/2018/06/30.json');
