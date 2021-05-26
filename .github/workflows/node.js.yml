@@ -1,4 +1,4 @@
-name: Fetch & merge stats 
+name: Fetch & merge the stats 
 on:
   push:
     branches: [ master ]
@@ -21,5 +21,9 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: node index.js
-    - run: node index-newinst-updates.js
+    - run: npm i -g node-fetch & node index.js
+    - run: hub release create -m 'Regular nightly build' -a daily.json -a weekly.json -a monthly.json -a yearly.json nightly
+      env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # - run: node index-newinst-updates.js - under construction
