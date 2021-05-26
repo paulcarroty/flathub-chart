@@ -1,0 +1,26 @@
+{
+  "name": "flathub-stats",
+  "version": "1.0.0",
+  "description": "Human-readable stats for https://flathub.org",
+  "main": "index.js",
+  "scripts": {
+    "run": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paulcarroty/flathub-app-stats.git"
+  },
+  "keywords": [
+    "flathub",
+    "stats"
+  ],
+  "author": "Pavlo Rudy",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/paulcarroty/flathub-app-stats/issues"
+  },
+  "homepage": "https://github.com/paulcarroty/flathub-app-stats#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}
