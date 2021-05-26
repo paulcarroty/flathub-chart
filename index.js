@@ -110,8 +110,8 @@ let monthlyStat = async () => {
 
 
 let yearlyStat = async () => {
-	let ysd = new Date().setHours(0, 0, 0, 0); // today date in ms minus 24h
-	let startDate = yst - 365 * 86400000; // 365 days ago
+	let ysd = new Date().setHours(0, 0, 0, 0); // today
+	let startDate = ysd - 365 * 86400000; // 365 days ago
 	let allDays = Math.floor((ysd - startDate) / 86400000);
 	// store all days time; 86400000 - 24h in ms
 	let year = [...Array(allDays).keys()].map(e => new Date(ysd - e * 86400000));
