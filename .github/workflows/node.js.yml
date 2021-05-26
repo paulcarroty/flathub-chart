@@ -1,5 +1,7 @@
 name: Fetch & merge the stats 
 on:
+  schedule: 
+  - cron: "45 22 * * *"
   push:
     branches: [ master ]
   pull_request:
@@ -7,9 +9,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-20.04
-
     strategy:
       matrix:
         node-version: [16.x]
