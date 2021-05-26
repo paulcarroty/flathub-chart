@@ -22,7 +22,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: npm run
+    - run: node index.js
     - run: hub release create -m 'Regular nightly build' -a daily.json -a weekly.json -a monthly.json -a yearly.json nightly
       env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
