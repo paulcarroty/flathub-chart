@@ -1,7 +1,7 @@
 name: Fetch & merge the stats 
 on:
   schedule: 
-  - cron: "45 22 * * *"
+  - cron: "30 4 * * *"
   push:
     branches: [ master ]
   pull_request:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [16.x]
@@ -21,8 +21,13 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm install
-    - run: node index.js
-    - run: hub release edit -m 'Regular nightly build' -a daily.json -a weekly.json -a monthly.json -a yearly.json nightly
+    - run: |
+        npm install
+        git config --global user.name paulcarroty && git config --global user.email $GMAIL
+        hub release delete nightly
+        node index.js
+        hub release create -m "Nightly build `date -u`" -a daily.json -a weekly.json -a monthly.json -a yearly.json nightly
       env: 
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GT }}
+        GMAIL: ${{ secrets.GMAIL }}
+
