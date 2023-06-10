@@ -140,4 +140,6 @@ let yearlyStat = async () => {
 //dailyStat();
 weeklyStat();
 monthlyStat();
-yearlyStat();
+if (new Date().getUTCDate() == 2){
+	yearlyStat();
+}
