@@ -59,7 +59,7 @@ let weeklyStat = async () => {
 	let ysd = new Date().setHours(0, 0, 0, 0); // today
 
 	// store last week datas; 86400000 = 24h in ms
-	let week = [...Array(7).keys()].map(e => ysd - e * 86400000);
+	let week = [...Array(7).keys()].map(e => ysd - (e+1) * 86400000);
 	let weekLinks = week.map(e => {
 		let dt = new Date(e);
 		let yr = dt.getUTCFullYear();
@@ -87,8 +87,8 @@ let weeklyStat = async () => {
 let monthlyStat = async () => {
 	let ysd = new Date().setHours(0, 0, 0, 0); // today
 
-	// store last week datas; 86400000 - 24h in ms
-	let month = [...Array(31).keys()].map(e => ysd - e * 86400000);
+	// store last week data; 86400000 - 24h in ms
+	let month = [...Array(31).keys()].map(e => ysd - (e+1) * 86400000);
 	let monthLinks = month.map(e => {
 		let dt = new Date(e);
 		let yr = dt.getUTCFullYear();
@@ -115,7 +115,7 @@ let yearlyStat = async () => {
 	let startDate = ysd - 365 * 86400000; // 365 days ago
 	let allDays = Math.floor((ysd - startDate) / 86400000);
 	// store all days time; 86400000 - 24h in ms
-	let year = [...Array(allDays).keys()].map(e => new Date(ysd - e * 86400000));
+	let year = [...Array(allDays).keys()].map(e => new Date(ysd - (e+1) * 86400000));
 	let yearLinks = year.map(e => {
 		let dt = new Date(e);
 		let yr = dt.getUTCFullYear();
