@@ -139,5 +139,5 @@ let yearlyStat = async () => {
 
 //dailyStat();
 weeklyStat();
-//monthlyStat();
-//yearlyStat();
+monthlyStat();
+yearlyStat();
