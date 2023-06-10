@@ -16,18 +16,18 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@master
       with:
         node-version: ${{ matrix.node-version }}
     - run: |
         npm install
         git config --global user.name paulcarroty && git config --global user.email $GMAIL
         node index.js
-        hub release create -m "Built in `date -u`"  latest || echo "can't create the release 'latest', probably it's available"
+        hub release create -m "Latest sync: `date -u`"  latest || echo "can't create the release 'latest', probably it's available"
         for chart in *ly.json; do
-          hub release edit latest -a "$chart" -m "Built in `date -u`"
+          hub release edit latest -a "$chart" -m "Latest sync: in `date -u`"
         done  
       env: 
         GITHUB_TOKEN: ${{ secrets.GT }}
