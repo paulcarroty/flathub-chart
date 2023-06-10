@@ -25,7 +25,8 @@ let riseAndShine = (toFile, obj) => {
 }
 
 
-let dailyStat = async (url) => {
+let dailyStat = async (url = `https://flathub.org/stats/${new Date().getUTCFullYear()}/${new Date().getUTCMonth() + 1 < 10 ? '0' + (new Date().getUTCMonth() + 1) : new Date().getUTCMonth() + 1}/${new Date().getUTCDate() - 1 < 10 ? '0' + (new Date().getUTCDate() -1) : new Date().getUTCDate() -1}.json`) => {
+	// fetch data from url, default arg - today-1 link
 	let data = await fetch(url)
 		.then(res => res.ok ? res : res.status)
 		.catch(error => console.error(`Fetch Error =\n`, error));
@@ -136,7 +137,7 @@ let yearlyStat = async () => {
 }
 
 
-//dailyStat('https://flathub.org/stats/2018/06/30.json');
-weeklyStat();
-monthlyStat();
-yearlyStat();
+dailyStat();
+//weeklyStat();
+//monthlyStat();
+//yearlyStat();
