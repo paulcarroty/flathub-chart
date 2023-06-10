@@ -1,7 +1,7 @@
 name: Fetch & merge the stats 
 on:
-  #schedule: 
-  #- cron: "30 4 * * *"
+  schedule: 
+    - cron: "0 4 * * *"
   push:
     branches: [ master ]
   pull_request:
