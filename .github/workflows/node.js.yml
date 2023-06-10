@@ -25,7 +25,7 @@ jobs:
         npm install
         git config --global user.name paulcarroty && git config --global user.email $GMAIL
         node index.js
-        hub release create -m "Nightly build `date -u`" -a daily.json -a weekly.json -a monthly.json -a yearly.json nightly
+        hub release create -m "Nightly build `date -u`" -a *.json  nightly
       env: 
         GITHUB_TOKEN: ${{ secrets.GT }}
         GMAIL: ${{ secrets.GMAIL }}
