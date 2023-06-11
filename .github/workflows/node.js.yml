@@ -1,4 +1,4 @@
-name: Fetch & merge the stats 
+name: Fetch 
 on:
   schedule: 
     - cron: "0 4 * * *"
@@ -25,11 +25,10 @@ jobs:
         npm install
         git config --global user.name paulcarroty && git config --global user.email $GMAIL
         node index.js
-        hub release create -m "Latest sync: `date -u`"  latest || echo "can't create the release 'latest', probably it's available"
+        hub release create -m "Daily sync `date -u`"  latest || echo "can't create the release 'latest', probably it's available"
         for chart in *ly.json; do
-          hub release edit latest -a "$chart" -m "Latest sync: in `date -u`"
+          hub release edit latest -a "$chart" -m "Daily sync `date -u`"
         done  
       env: 
         GITHUB_TOKEN: ${{ secrets.GT }}
         GMAIL: ${{ secrets.GMAIL }}
-
