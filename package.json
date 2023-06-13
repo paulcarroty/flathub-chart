@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/paulcarroty/flathub-app-stats.git"
+    "url": "git+https://github.com/paulcarroty/flathub-chart.git"
   },
   "keywords": [
     "flathub",
@@ -17,10 +17,9 @@
   "author": "Pavlo Rudy",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/paulcarroty/flathub-app-stats/issues"
+    "url": "https://github.com/paulcarroty/flathub-chart/issues"
   },
-  "homepage": "https://github.com/paulcarroty/flathub-app-stats#readme",
+  "homepage": "https://github.com/paulcarroty/flathub-chart#readme",
   "dependencies": {
-    "node-fetch": "^2"
   }
 }
