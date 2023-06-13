@@ -1,4 +1,3 @@
-const fetch = require('node-fetch');
 const fs = require('fs');
 
 let mergeObjs = (o1, o2) => {
