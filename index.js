@@ -1,4 +1,6 @@
 const fs = require('fs');
+const timersPromises = require('timers/promises');
+
 
 let mergeObjs = (o1, o2) => {
 	// merge two days data
@@ -29,6 +31,8 @@ let dailyStat = async (url = `https://flathub.org/stats/${new Date().getUTCFullY
 	let data = await fetch(url)
 		.then(res => res.ok ? res : res.status)
 		.catch(error => console.error(`Fetch Error =\n`, error));
+
+	await timersPromises.setTimeout(2000 + Math.random() * 5000);
 
 	if (typeof (data) !== 'number') {
 
