@@ -1,5 +1,6 @@
 const fs = require('fs');
 const timersPromises = require('timers/promises');
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 
 let mergeObjs = (o1, o2) => {
@@ -29,7 +30,7 @@ let riseAndShine = (toFile, obj) => {
 let dailyStat = async (url = `https://flathub.org/stats/${new Date().getUTCFullYear()}/${new Date().getUTCMonth() + 1 < 10 ? '0' + (new Date().getUTCMonth() + 1) : new Date().getUTCMonth() + 1}/${new Date().getUTCDate() - 1 < 10 ? '0' + (new Date().getUTCDate() -1) : new Date().getUTCDate() -1}.json`) => {
 	// fetch data from url, default arg - today-1 link
 	let data = await fetch(url)
-		.then(res => res?.ok ? res : res.status)
+		.then(res => res.ok ? res : res.status)
 		.catch(error => console.error(`Fetch Error =\n`, error));
 
 	await timersPromises.setTimeout(2000 + Math.random() * 5000);
