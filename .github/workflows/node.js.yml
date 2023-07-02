@@ -22,7 +22,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: |
-        npm install
+        npm install node-fetch
         git config --global user.name paulcarroty && git config --global user.email $GMAIL
         node index.js
         hub release create -m "Daily sync `date -u`"  latest || echo "can't create the release 'latest', probably it's available"
