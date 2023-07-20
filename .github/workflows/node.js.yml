@@ -7,8 +7,24 @@ on:
   pull_request:
     branches: [master]
 
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false  
+
 jobs:
   build:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -28,8 +44,18 @@ jobs:
           hub release create -m "Daily sync `date -u`"  latest || echo "can't create the release 'latest', probably it's available"
           for chart in *ly.json timestamp.json; do
             hub release edit latest -a "$chart" -m "Daily sync `date -u`"
-            mv chart src/assets/
+            mv $chart src/assets/
           done
+          npm run build          
         env:
           GITHUB_TOKEN: ${{ secrets.GT }}
           GMAIL: ${{ secrets.GMAIL }}
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: 'dist'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
