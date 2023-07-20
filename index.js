@@ -24,6 +24,15 @@ let riseAndShine = (toFile, obj) => {
 		if (err) throw err;
 		//console.log('Successfully saved!');
 	});
+
+	fs.writeFile(toFile, JSON.stringify(res, null, 2), 'utf8', (err) => {
+		if (err) throw err;
+		//console.log('Successfully saved!');
+	});
+
+	fs.writeFile('./timestamp.json', JSON.stringify({ "sync": new Date().toJSON() }, null, 2), 'utf8', (err) => {
+		if(err) throw err;
+	});
 }
 
 
