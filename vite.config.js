@@ -7,5 +7,6 @@ export default defineConfig({
 	optimizeDeps: {},
   server: {
     host: true
-  }
+  },
+  base: "./"
 })
