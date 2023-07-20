@@ -1,25 +1,33 @@
 {
-  "name": "flathub-stats",
+  "name": "flathub-chart",
   "version": "1.0.0",
-  "description": "Human-readable stats for https://flathub.org",
+  "description": "The chart for Flathub",
   "main": "index.js",
   "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "serve": "vite preview"
     "run": "node index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/paulcarroty/flathub-chart.git"
   },
-  "keywords": [
-    "flathub",
-    "stats"
-  ],
+  "keywords": [ "flathub", "stats", "chart", "data"],
   "author": "Pavlo Rudy",
   "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/paulcarroty/flathub-chart/issues"
   },
   "homepage": "https://github.com/paulcarroty/flathub-chart#readme",
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^1.0.1",
+    "svelte": "^3.49.0",
+    "vite": "^3.0.4"
+  },
   "dependencies": {
+    "chart.js": "^4.3.0",
+    "svelte-chartjs": "^3.1.2",
+    "node-fetch": "^3.3.1"
   }
 }
