@@ -26,7 +26,7 @@ jobs:
         git config --global user.name paulcarroty && git config --global user.email $GMAIL
         node index.js
         hub release create -m "Daily sync `date -u`"  latest || echo "can't create the release 'latest', probably it's available"
-        for chart in *ly.json; do
+        for chart in *ly.json timestamp.json; do
           hub release edit latest -a "$chart" -m "Daily sync `date -u`"
         done  
       env: 
