@@ -1,12 +1,12 @@
 {
   "name": "flathub-chart",
   "version": "1.0.0",
-  "description": "The chart for Flathub",
+  "description": "The Flathub Chart",
   "main": "index.js",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
     "run": "node index.js"
   },
   "repository": {
