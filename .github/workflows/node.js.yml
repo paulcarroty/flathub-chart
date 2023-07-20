@@ -1,11 +1,11 @@
-name: Fetch 
+name: Fetch
 on:
-  schedule: 
+  schedule:
     - cron: "0 4 * * *"
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -16,19 +16,20 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@master
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@master
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: |
-        npm install
-        node fetch.js
-        git config --global user.name paulcarroty && git config --global user.email $GMAIL
-        hub release create -m "Daily sync `date -u`"  latest || echo "can't create the release 'latest', probably it's available"
-        for chart in *ly.json timestamp.json; do
-          hub release edit latest -a "$chart" -m "Daily sync `date -u`"
-        done  
-      env: 
-        GITHUB_TOKEN: ${{ secrets.GT }}
-        GMAIL: ${{ secrets.GMAIL }}
+      - uses: actions/checkout@master
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@master
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: |
+          npm install
+          node fetch.js
+          git config --global user.name paulcarroty && git config --global user.email $GMAIL
+          hub release create -m "Daily sync `date -u`"  latest || echo "can't create the release 'latest', probably it's available"
+          for chart in *ly.json timestamp.json; do
+            hub release edit latest -a "$chart" -m "Daily sync `date -u`"
+            mv chart src/assets/
+          done
+        env:
+          GITHUB_TOKEN: ${{ secrets.GT }}
+          GMAIL: ${{ secrets.GMAIL }}

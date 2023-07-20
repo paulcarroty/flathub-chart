@@ -1,6 +1,5 @@
-# flathub-app-stats
-Human-readable app statistic for https://flathub.org/
+# Flathub Chart
 
-Yearly, monthly, weekly and daily download counters with everyday updates and easily apps tracking.
+Human-readable stats for [Flathub](https://flathub.org)
 
-Sorting by largest. Check the daily results [here](https://github.com/paulcarroty/flathub-app-stats/releases).
+Yearly, monthly, weekly and daily download counters with daily updates and easy app tracking.
