@@ -1,5 +1,15 @@
 # Flathub Chart
 
-Human-readable stats for [Flathub](https://flathub.org)
+The most popular Flathub apps sorted by downloads with daily updates
 
-Yearly, monthly, weekly and daily download counters with daily updates and easy app tracking.
+Website - https://paulcarroty.github.io/flathub-chart/
+
+Features:
+
+- Full lists for a day, week, month and year periods
+- Search
+- 2D Charts for top 40 apps
+
+TODO:
+
+- Include the charts for app updates and new installations
