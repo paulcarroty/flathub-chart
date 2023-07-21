@@ -2,9 +2,11 @@
 </script>
 
 <p>
-  Built with ❤️, <a href="https://svelte.dev" target="_blank">Svelte</a>,
+  Created by <a href="https://github.com/paulcarroty" target="_blank">@paulcarroty</a> with ❤️,
+  <a href="https://svelte.dev" target="_blank">Svelte</a>,
   <a href="https://nodejs.org" target="_blank">Node.js</a> and
-  <a href="https://flathub.org/stats" target="_blank">flathub.org/stats</a>
+  <a href="https://flathub.org/stats" target="_blank">flathub.org/stats</a>.
+   The code is <a href="https://github.com/paulcarroty/flathub-chart" target="_blank">Open Source</a>.
 </p>
 
 <style>
