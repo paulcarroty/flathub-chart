@@ -13,6 +13,10 @@ let mergeObjs = (o1, o2) => {
 }
 
 let riseAndShine = (toFile, obj) => {
+        // SDK filter
+	obj = Object.fromEntries( Object.entries(obj).filter( ([k,v]) => !k.match('Platform') ));
+
+	
 	//sorting by values and write to file
 
 	let res = Object.keys(obj).sort((a, b) => obj[b] - obj[a])
