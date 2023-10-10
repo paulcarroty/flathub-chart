@@ -45,6 +45,7 @@ jobs:
           curl -L https://github.com/paulcarroty/flathub-chart/releases/download/latest/monthly.json -o src/assets/monthly.json
           curl -L https://github.com/paulcarroty/flathub-chart/releases/download/latest/yearly.json -o src/assets/yearly.json
           curl -L https://github.com/paulcarroty/flathub-chart/releases/download/latest/timestamp.json -o src/assets/timestamp.json
+          sudo apt update && sudo apt install hub
           hub release create -m "Daily sync `date -u`"  latest || echo "can't create the release 'latest', probably it's available"
           node fetch.js && for chart in *ly.json timestamp.json; do
             hub release edit latest -a "$chart" -m "Daily sync `date -u`"
