@@ -23,7 +23,7 @@
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.1.2",
     "svelte": "^4.2.19",
-    "vite": "^3.0.4"
+    "vite": "^4.0.0"
   },
   "dependencies": {
     "chart.js": "^4.3.0",
