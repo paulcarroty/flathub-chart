@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/paulcarroty/flathub-chart#readme",
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^1.0.1",
+    "@sveltejs/vite-plugin-svelte": "^3.1.2",
     "svelte": "^4.2.19",
     "vite": "^3.0.4"
   },
