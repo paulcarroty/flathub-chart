@@ -39,7 +39,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: |
-          npm install
+          npm install --legacy-peer-deps
           git config --global user.name paulcarroty && git config --global user.email $GMAIL
           curl -L https://github.com/paulcarroty/flathub-chart/releases/download/latest/daily.json -o src/assets/daily.json
           curl -L https://github.com/paulcarroty/flathub-chart/releases/download/latest/weekly.json -o src/assets/weekly.json
