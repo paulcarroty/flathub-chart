@@ -1,5 +1,5 @@
-const fs = require('fs');
-const timersPromises = require('timers/promises');
+import fs from 'fs';
+import timersPromises from 'timers/promises';
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 
