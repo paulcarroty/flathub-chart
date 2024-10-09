@@ -1,6 +1,7 @@
 {
   "name": "flathub-chart",
   "version": "1.0.0",
+  "type": "module",
   "description": "The Flathub Chart",
   "main": "index.js",
   "scripts": {
