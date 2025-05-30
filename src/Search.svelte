@@ -1,6 +1,6 @@
 <script>
   export let dStat, wStat, mStat, yStat;
-  let keyword = "";
+  let keyword = '', appId = '';
   const searchApp = (app) => {
     if (app.toString().length < 3 || typeof app != "string") return "";
     let res = "";
@@ -17,6 +17,8 @@
         e.toLowerCase().includes(app.toLowerCase())
       );
 
+      appId = search ?? "";
+
       search
         ? (res =
             res +
@@ -25,8 +27,18 @@
             }<br/> `)
         : "";
     }
-    return res;
+    return `Found: <span style="display: inline-block;
+      background: linear-gradient(45deg, #ff6b35, #f7931e, #ffcc02);
+      background-size: 200% 200%;
+      color: #B91C1C;
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 6px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 8px rgba(255,107,53,0.4);
+      border: 1px solid rgba(255,255,255,0.2);">${appId}</span><br/>${res}`;
   };
+
   $: result = searchApp(keyword);
 </script>
 
