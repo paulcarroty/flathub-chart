@@ -1,5 +1,5 @@
 <script>
-  import { Bar } from "svelte-chartjs";
+  import { Bar } from "svelte5-chartjs";
   import {
     Chart,
     Title,
@@ -16,10 +16,9 @@
     Legend,
     BarElement,
     CategoryScale,
-    LinearScale
+    LinearScale,
   );
-  export let data;
-  export let options;
+  let { data, options } = $props();
 </script>
 
 <div class="bar">

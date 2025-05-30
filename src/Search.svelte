@@ -1,6 +1,9 @@
 <script>
-  export let dStat, wStat, mStat, yStat;
-  let keyword = '', appId = '';
+  let { dStat, wStat, mStat, yStat } = $props();
+
+  let keyword = $state("");
+  let appId = "";
+
   const searchApp = (app) => {
     if (app.toString().length < 3 || typeof app != "string") return "";
     let res = "";
@@ -14,7 +17,7 @@
 
     for (let stat of fullstat) {
       let search = Object.keys(stat.area).find((e) =>
-        e.toLowerCase().includes(app.toLowerCase())
+        e.toLowerCase().includes(app.toLowerCase()),
       );
 
       appId = search ?? "";
@@ -27,19 +30,19 @@
             }<br/> `)
         : "";
     }
-    return `Found: <span style="display: inline-block;
-      background: linear-gradient(45deg, #ff6b35, #f7931e, #ffcc02);
-      background-size: 200% 200%;
-      color: #B91C1C;
-      font-weight: bold;
-      padding: 4px 8px;
-      border-radius: 6px;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-      box-shadow: 0 2px 8px rgba(255,107,53,0.4);
-      border: 1px solid rgba(255,255,255,0.2);">${appId}</span><br/>${res}`;
+    return `Found: <span style="background: linear-gradient(45deg, #ff6b35, #f7931e, #ffcc02);
+    background-size: 200% 200%;
+    color: #B91C1C;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 6px;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 8px rgba(255,107,53,0.4);
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,0.2);">${appId}</span><br/>${res}`;
   };
 
-  $: result = searchApp(keyword);
+  let result = $derived(searchApp(keyword));
 </script>
 
 <div id="search">
@@ -58,6 +61,18 @@
     margin: 0.5rem auto 0 auto;
     line-height: 1.35;
     text-align: justify-all;
+  }
+
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
   input {

@@ -1,5 +1,5 @@
 <script>
-  export let time;
+  let { time } = $props();
   const localtime = new Date(time.sync).toLocaleString();
 </script>
 

@@ -1,14 +1,12 @@
 <script>
-  export let title;
-  export let stats;
-  export let color;
-  let fullsize = false;
+  let { title, stats, color } = $props();
+  let fullsize = $state(false);
   const increment = () => {
     fullsize = !fullsize;
   };
-  $: chartItems = fullsize
+  let chartItems = $derived(fullsize
     ? stats
-    : Object.fromEntries(Object.entries(stats).slice(0, 40));
+    : Object.fromEntries(Object.entries(stats).slice(0, 40)));
 </script>
 
 <h3 style="--theme-color: {color};">{title}</h3>
@@ -44,7 +42,7 @@
   {/each}
 </ul>
 
-<button on:click={increment}>
+<button onclick={increment}>
   {fullsize ? "⬆️" : "⬇️"}
 </button>
 <p style="font-style: italic;">
