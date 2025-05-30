@@ -14,7 +14,7 @@ Website - https://paulcarroty.github.io/flathub-chart/
 Features:
 
 - Full lists for a day, week, month and year periods
-- Search
+- Interactive search
 - 2D Charts for top 40 apps
 
 TODO:
